@@ -1,0 +1,80 @@
+; RUN CONTROL PARAMETERS
+integrator               = md
+tinit                    = 0
+; Most force fields are apparently parameterised using constraints on h-bonds and a 2 fs time step.
+; Moreover, we save a factor 2 in computing resources with this choice.
+; Changes in configurational entropy are an important contribution to protein-ligand binding.
+; However, entropy changes due to differential hydrogen mobility in the bound and free form are usually negligible.
+; On top of that, with the methods currently available (QH, C2, IE), we can most likely not calculate the configurational entropy change when running the implicit-solvent calculation.
+; Therefore, there is no point in investing the resources needed by a 1 fs time step.
+dt                       = 0.002
+nsteps                   = 50000 ; 100 ps
+
+comm-mode                = Linear
+nstcomm                  = 100
+nstcalcenergy		 = 100
+
+; OUTPUT CONTROL OPTIONS
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstlog                   = 500 ; 1 ps to be consistent with nstxout-compressed
+nstenergy                = 500 ; 1 ps to be consistent with nstxout-compressed
+nstxout-compressed       = 500 ; 1 ps for statistics
+compressed-x-precision   = 1000
+
+cutoff-scheme            = verlet
+nstlist                  = 50
+pbc                      = xyz
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+coulombtype              = PME
+coulomb-modifier         = Potential-shift
+rcoulomb                 = 1.0
+vdwtype                  = Cut-off
+vdw-modifier             = Potential-shift
+rvdw                     = 1.0
+DispCorr                 = EnerPres
+fourierspacing           = 0.125
+
+; IMPLICIT SOLVENT (for use with Generalized Born electrostatics)
+implicit_solvent         = No
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+tcoupl                   = v-rescale
+tc-grps                  = complex
+tau-t                    = 0.1
+ref-t                    = 298
+Pcoupl                   = C-rescale
+Pcoupltype               = Isotropic
+tau-p                    = 2.0
+compressibility          = 4.6E-5
+ref-p                    = 1
+
+; SIMULATED ANNEALING  
+annealing                = no
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen-vel                  = yes
+gen-temp                 = 298
+gen-seed                 = -1
+
+; OPTIONS FOR BONDS (not used, but left as they might be used)
+constraints              = h-bonds
+constraint-algorithm     = Lincs
+continuation             = no
+Shake-SOR                = no
+shake-tol                = 1e-04
+lincs-order              = 4
+lincs-iter               = 2
+lincs-warnangle          = 30
+morse                    = no
+
+; ENERGY GROUP EXCLUSIONS
+; Pairs of energy groups for which all non-bonded interactions are excluded
+energygrp_excl           = 
+
+; Free energy control stuff
+free-energy              = no
+
+;refcoord-scaling = com

@@ -1,0 +1,54 @@
+; VARIOUS PREPROCESSING OPTIONS
+define                   = -DFLEXIBLE -DPOSRES
+
+; RUN CONTROL PARAMETERS
+integrator               = steep
+tinit                    = 0
+dt                       = 0.002
+nsteps                   = 100 ; should only remove steric clashes that make the simulation explode
+
+comm-mode                = Linear
+nstcomm                  = 1
+nstcalcenergy		 = 1
+
+; ENERGY MINIMIZATION OPTIONS (sticking to the relevant defaults)
+emtol                    = 10
+emstep                   = 0.001
+niter                    = 20 ; maybe try 0 here if EM doesn't work
+fcstep                   = 0
+
+; NEIGHBORSEARCHING PARAMETERS
+cutoff-scheme            = verlet
+nstlist                  = 10
+pbc                      = xyz
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+coulombtype              = PME
+coulomb-modifier         = Potential-shift
+rcoulomb                 = 1.0
+vdwtype                  = Cut-off
+vdw-modifier             = Potential-shift
+rvdw                     = 1.0
+DispCorr                 = EnerPres
+fourierspacing           = 0.125
+
+; IMPLICIT SOLVENT
+implicit_solvent         = No
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+tcoupl                   = No
+Pcoupl                   = No
+
+; SIMULATED ANNEALING  
+annealing                = no
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen-vel                  = no
+
+; OPTIONS FOR BONDS    
+constraints              = none
+
+; Free energy control stuff
+free-energy              = no
+
+refcoord-scaling = com

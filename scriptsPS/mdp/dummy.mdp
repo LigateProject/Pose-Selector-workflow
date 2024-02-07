@@ -1,0 +1,75 @@
+; RUN CONTROL PARAMETERS
+integrator               = md
+tinit                    = 0
+dt                       = 0.002 ; very small time step (0.001) to be able not to use constraints, but constraints will be used in long validation runs
+nsteps                   = 500000000 ; 1000 ns
+
+comm-mode                = Linear
+nstcomm                  = 100
+nstcalcenergy		 = 100
+
+; OUTPUT CONTROL OPTIONS
+nstxout                  = 0
+nstvout                  = 0
+nstfout                  = 0
+nstlog                   = 5000
+nstenergy                = 5000
+nstxout-compressed       = 5000
+compressed-x-precision   = 1000
+compressed-x-grps        = System
+
+cutoff-scheme            = verlet
+nstlist                  = 50
+pbc                      = xyz
+
+; OPTIONS FOR ELECTROSTATICS AND VDW
+coulombtype              = PME
+coulomb-modifier         = Potential-shift
+rcoulomb                 = 1.0
+vdwtype                  = Cut-off
+vdw-modifier             = Potential-shift
+rvdw                     = 1.0
+DispCorr                 = EnerPres
+fourierspacing           = 0.125
+
+; IMPLICIT SOLVENT (for use with Generalized Born electrostatics)
+implicit_solvent         = No
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+tcoupl                   = v-rescale
+tc-grps                  = System
+tau-t                    = 0.1
+ref-t                    = 298
+Pcoupl                   = C-rescale
+Pcoupltype               = Isotropic
+tau-p                    = 0.5
+compressibility          = 4.6E-5
+ref-p                    = 1
+
+; SIMULATED ANNEALING  
+annealing                = no
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen-vel                  = yes
+gen-temp                 = 298
+gen-seed                 = -1
+
+; OPTIONS FOR BONDS (not used, but left as they might be used)
+constraints              = h-bonds
+constraint-algorithm     = Lincs
+continuation             = no
+Shake-SOR                = no
+shake-tol                = 1e-04
+lincs-order              = 4
+lincs-iter               = 2
+lincs-warnangle          = 30
+morse                    = no
+
+; ENERGY GROUP EXCLUSIONS
+; Pairs of energy groups for which all non-bonded interactions are excluded
+energygrp_excl           = 
+
+; Free energy control stuff
+free-energy              = no
+
+;refcoord-scaling = com
