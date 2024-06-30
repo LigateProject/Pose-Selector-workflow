@@ -16,7 +16,7 @@ source GMXMMPBSA.sh
 PATH_TO_SCRIPTS=scriptsPS
 LIGANDFF="gaff2"
 
-solvationModel="pb" # for the sake of efficiency, the LPBE is solved
+solvationModel="gb" # Generalised Born model of implicit solvation
 # a full list of input parameters for 3D-RISM and descriptions can be found at https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/#rism-namelist-variables
 # a full list of input parameters for Poisson-Boltzmann and descriptions can be found at https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/#pb-namelist-variables
 # a full list of requirements to use gmx_MMPBSA for single protein-ligand trajectories: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/examples/Protein_ligand/ST/

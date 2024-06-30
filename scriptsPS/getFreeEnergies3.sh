@@ -3,7 +3,7 @@ set -e; shopt -s expand_aliases
 
 PDBids=(6mj7 5yj8 5ovp 4mn3 5wxh 6j3p 4wn5 4zyf 6udu 6udt 5d3c 6dif 5dgw 6e9a)
 
-solvationModel="pb"
+solvationModel="gb"
 conversionFactor=4.184
 
 for PDBid in ${PDBids[@]}; do

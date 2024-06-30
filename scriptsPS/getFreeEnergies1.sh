@@ -7,7 +7,7 @@ module load gromacs/2023.2 gromacs=gmx
 PDBids=(5ovp 4mn3 5wxh 6j3p 4wn5 4zyf 6udu 6udt 5d3c 6dif 5dgw 6e9a)
 
 PATH_TO_MDP=scriptsPS/mdp
-solvationModel="pb"
+solvationModel="gb"
 
 for PDBid in ${PDBids[@]}; do
 cd ${PDBid}
